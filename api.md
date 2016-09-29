@@ -13,7 +13,14 @@ The events are:
 
 ## onPeerConnection
 
-This event is dispatched whenever an RTCPeerConnection is established.
+This event is dispatched when an initial attemp is made to establish
+a peer connection (by calling any of the methods
+[`createOffer()`](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/createOffer),
+[`createAnswer()`](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/createAnswer),
+[`setLocalDescription()`](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/setLocalDescription),
+or [`setRemoteDescription()`](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/setRemoteDescription)
+on an [`RTCPeerConnection`](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/RTCPeerConnection)
+).
 Usage is similar to other webextension events, though note that optional
 extra argument to `addListener()`:
 
@@ -68,8 +75,9 @@ user, but it may also happen if the user perviously granted permanent
 permission to a particular page.
 
 Extensions can use this event to avoid excessive user prompts
-(i.e., by allowing an RTCPeerConnection for a given origin if the
-user has already granted access to their media devices for that origin).
+(i.e., by avoiding also asking for permission to establish a peer
+connection if the
+user has already granted access to their media devices for the origin).
 
 ```js
 function listener(origin, permissions) { ... }
@@ -80,7 +88,8 @@ browser.webrtc.onMediaPermissions.hasListener(listener);
 ```
 
 The `origin` argument is the origin of the page that has been granted
-permissions.  The `permissions` argument is an object with two properties:
+permissions (
+The `permissions` argument is an object with two properties:
 `camera` and `microphone`.  These properties are boolean-valued and
-indicate whether permission has been granted to access a camera and
+indicate whether permission has been granted to access a camera or
 microphone device, respectively.
