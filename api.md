@@ -11,7 +11,7 @@ this api lands in central).  In addition, an extension must have the
 
 The events are:
 
-## onPeerConnection
+## onPeerConnectionRequest
 
 This event is dispatched when an initial attemp is made to establish
 a peer connection (by calling any of the methods
@@ -27,16 +27,16 @@ extra argument to `addListener()`:
 ```js
 function listener(origin, id) { ... }
 
-browser.webrtc.onPeerConnection.addListener(listener, blocking);
-browser.webrtc.onPeerConnection.removeListener(listener);
-browser.webrtc.onPeerConnection.hasListener(listener);
+browser.webrtc.onPeerConnectionRequest.addListener(listener, blocking);
+browser.webrtc.onPeerConnectionRequest.removeListener(listener);
+browser.webrtc.onPeerConnectionRequest.hasListener(listener);
 ```
 
 The provided callback function (`listener` above) is passed the origin
 of the page that is opening a peer connection as a string, and an
 opaque identifier that can be used to identify the specific connection
 request being canceled when handling the 
-[`onPeerConnectionCancel`](#onPeerConnectionCancel) event.
+[`onPeerConnectionRequestCanceled`](#onPeerConnectionRequestCanceled) event.
 
 If a truthy value is passed for the `blocking` argument,
 the value returned from the listener function controls whether
@@ -50,21 +50,21 @@ the processing described above is applied to the Promise resolution value.
 
 ## onPeerConnectionCancel
 
-This event is dispatched when a pending RTCPeerConnection is canceled
+This event is dispatched when a pending peer connection is canceled
 (which happens for example when a tab with a pending connection is closed
 or navigates to another page).
 
 ```js
 function listener(origin, id) { ... }
 
-browser.webrtc.onPeerConnectionCancel.addListener(listener);
-browser.webrtc.onPeerConnectionCancel.removeListener(listener);
-browser.webrtc.onPeerConnectionCancel.hasListener(listener);
+browser.webrtc.onPeerConnectionRequestCanceled.addListener(listener);
+browser.webrtc.onPeerConnectionRequestCanceled.removeListener(listener);
+browser.webrtc.onPeerConnectionRequestCanceled.hasListener(listener);
 ```
 
 The `origin` and `id` arguments passed to the listener are
 identical to those passed to a listener for
-[`onPeerConnection`](#onPeerConnection).
+[`onPeerConnectionRequest`](#onPeerConnectionRequest).
 
 ## onMediaPermissions
 
