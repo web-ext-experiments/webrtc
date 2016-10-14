@@ -1,0 +1,65 @@
+[
+  {
+    "namespace": "webrtc",
+    "description": "Hook WebRTC PeerConnection requests",
+    "events": [
+      {
+        "name": "onPeerConnectionRequest",
+        "description": "This event fires whenever there is a request to establish a new peer connection.  If the blocking flag is true, the return value from the event handler may be used to allow or deny the request",
+        "type": "function",
+        "parameters": [
+          {
+            "name": "origin",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "type": "number"
+          }
+        ],
+        "extraParameters": [
+          {
+            "name": "blocking",
+            "type": "boolean"
+          }
+        ]
+      },
+      {
+        "name": "onPeerConnectionRequestCancel",
+        "description": "This event fires when a previous peer connection request is canceled.",
+        "type": "function",
+        "parameters": [
+          {
+            "name": "origin",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "name": "onMediaPermissions",
+        "description": "This event fires after the user responds to the prompt displayed when getUserMedia() is called.",
+        "type": "function",
+        "parameters": [
+          {
+            "name": "request",
+            "type": "object",
+            "properties": {
+              "camera": {
+                "type": "boolean",
+                "description": "Was permission granted for the camera"
+              },
+              "microphone": {
+                "type": "boolean",
+                "description": "Was permission granted for the microphone"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
